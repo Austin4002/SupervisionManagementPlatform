@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.ResourceMapper">
+  <resultMap id="BaseResultMap" type="pojo.Resource">
+    <id column="resource_id" jdbcType="VARCHAR" property="resourceId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="resource_name" jdbcType="VARCHAR" property="resourceName" />
+    <result column="resource_number" jdbcType="INTEGER" property="resourceNumber" />
+    <result column="resource_value" jdbcType="REAL" property="resourceValue" />
+    <result column="resource_location" jdbcType="VARCHAR" property="resourceLocation" />
+    <result column="resource_remark" jdbcType="VARCHAR" property="resourceRemark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    resource_id, user_id, resource_name, resource_number, resource_value, resource_location, 
+    resource_remark
+  </sql>
+  <select id="selectByExample" parameterType="pojo.ResourceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from resource
+    where resource_id = #{resourceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from resource
+    where resource_id = #{resourceId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="pojo.ResourceExample">
+    delete from resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.Resource">
+    insert into resource (resource_id, user_id, resource_name, 
+      resource_number, resource_value, resource_location, 
+      resource_remark)
+    values (#{resourceId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{resourceName,jdbcType=VARCHAR}, 
+      #{resourceNumber,jdbcType=INTEGER}, #{resourceValue,jdbcType=REAL}, #{resourceLocation,jdbcType=VARCHAR}, 
+      #{resourceRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Resource">
+    insert into resource
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="resourceId != null">
+        resource_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="resourceName != null">
+        resource_name,
+      </if>
+      <if test="resourceNumber != null">
+        resource_number,
+      </if>
+      <if test="resourceValue != null">
+        resource_value,
+      </if>
+      <if test="resourceLocation != null">
+        resource_location,
+      </if>
+      <if test="resourceRemark != null">
+        resource_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="resourceId != null">
+        #{resourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceName != null">
+        #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceNumber != null">
+        #{resourceNumber,jdbcType=INTEGER},
+      </if>
+      <if test="resourceValue != null">
+        #{resourceValue,jdbcType=REAL},
+      </if>
+      <if test="resourceLocation != null">
+        #{resourceLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceRemark != null">
+        #{resourceRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.ResourceExample" resultType="java.lang.Long">
+    select count(*) from resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update resource
+    <set>
+      <if test="record.resourceId != null">
+        resource_id = #{record.resourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceName != null">
+        resource_name = #{record.resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceNumber != null">
+        resource_number = #{record.resourceNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.resourceValue != null">
+        resource_value = #{record.resourceValue,jdbcType=REAL},
+      </if>
+      <if test="record.resourceLocation != null">
+        resource_location = #{record.resourceLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceRemark != null">
+        resource_remark = #{record.resourceRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update resource
+    set resource_id = #{record.resourceId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      resource_name = #{record.resourceName,jdbcType=VARCHAR},
+      resource_number = #{record.resourceNumber,jdbcType=INTEGER},
+      resource_value = #{record.resourceValue,jdbcType=REAL},
+      resource_location = #{record.resourceLocation,jdbcType=VARCHAR},
+      resource_remark = #{record.resourceRemark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Resource">
+    update resource
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceName != null">
+        resource_name = #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceNumber != null">
+        resource_number = #{resourceNumber,jdbcType=INTEGER},
+      </if>
+      <if test="resourceValue != null">
+        resource_value = #{resourceValue,jdbcType=REAL},
+      </if>
+      <if test="resourceLocation != null">
+        resource_location = #{resourceLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceRemark != null">
+        resource_remark = #{resourceRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where resource_id = #{resourceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Resource">
+    update resource
+    set user_id = #{userId,jdbcType=VARCHAR},
+      resource_name = #{resourceName,jdbcType=VARCHAR},
+      resource_number = #{resourceNumber,jdbcType=INTEGER},
+      resource_value = #{resourceValue,jdbcType=REAL},
+      resource_location = #{resourceLocation,jdbcType=VARCHAR},
+      resource_remark = #{resourceRemark,jdbcType=VARCHAR}
+    where resource_id = #{resourceId,jdbcType=VARCHAR}
+  </update>
+</mapper>

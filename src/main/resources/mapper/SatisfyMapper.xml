@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.SatisfyMapper">
+  <resultMap id="BaseResultMap" type="pojo.Satisfy">
+    <id column="satisfy_id" jdbcType="VARCHAR" property="satisfyId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="information_id" jdbcType="VARCHAR" property="informationId" />
+    <result column="satisfy_star" jdbcType="REAL" property="satisfyStar" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    satisfy_id, user_id, information_id, satisfy_star
+  </sql>
+  <select id="selectByExample" parameterType="pojo.SatisfyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from satisfy
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from satisfy
+    where satisfy_id = #{satisfyId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from satisfy
+    where satisfy_id = #{satisfyId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="pojo.SatisfyExample">
+    delete from satisfy
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.Satisfy">
+    insert into satisfy (satisfy_id, user_id, information_id, 
+      satisfy_star)
+    values (#{satisfyId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{informationId,jdbcType=VARCHAR}, 
+      #{satisfyStar,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Satisfy">
+    insert into satisfy
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="satisfyId != null">
+        satisfy_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="informationId != null">
+        information_id,
+      </if>
+      <if test="satisfyStar != null">
+        satisfy_star,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="satisfyId != null">
+        #{satisfyId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="informationId != null">
+        #{informationId,jdbcType=VARCHAR},
+      </if>
+      <if test="satisfyStar != null">
+        #{satisfyStar,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.SatisfyExample" resultType="java.lang.Long">
+    select count(*) from satisfy
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update satisfy
+    <set>
+      <if test="record.satisfyId != null">
+        satisfy_id = #{record.satisfyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.informationId != null">
+        information_id = #{record.informationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.satisfyStar != null">
+        satisfy_star = #{record.satisfyStar,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update satisfy
+    set satisfy_id = #{record.satisfyId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      information_id = #{record.informationId,jdbcType=VARCHAR},
+      satisfy_star = #{record.satisfyStar,jdbcType=REAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Satisfy">
+    update satisfy
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="informationId != null">
+        information_id = #{informationId,jdbcType=VARCHAR},
+      </if>
+      <if test="satisfyStar != null">
+        satisfy_star = #{satisfyStar,jdbcType=REAL},
+      </if>
+    </set>
+    where satisfy_id = #{satisfyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Satisfy">
+    update satisfy
+    set user_id = #{userId,jdbcType=VARCHAR},
+      information_id = #{informationId,jdbcType=VARCHAR},
+      satisfy_star = #{satisfyStar,jdbcType=REAL}
+    where satisfy_id = #{satisfyId,jdbcType=VARCHAR}
+  </update>
+</mapper>
