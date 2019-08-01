@@ -27,4 +27,8 @@ public interface InformationMapper {
     int updateByPrimaryKeySelective(Information record);
 
     int updateByPrimaryKey(Information record);
+
+	int getCountByType(String informationType);
+
+	List<Information> findInformationByType(@Param("index") int index,@Param("currentCount") int currentCount,@Param("informationType") String informationType);
 }

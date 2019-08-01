@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd" "-//mybatis.org//DTD Mapper 3.0//EN">
 <mapper namespace="dao.InformationMapper">
   <resultMap id="BaseResultMap" type="pojo.Information">
     <id column="information_id" jdbcType="VARCHAR" property="informationId" />
@@ -226,4 +226,15 @@
       isHot = #{ishot,jdbcType=INTEGER}
     where information_id = #{informationId,jdbcType=VARCHAR}
   </update>
+  
+  <select id="getCountByType" parameterType="String" resultType="java.long.Integer">
+  	select count(*) from information
+  	where  information_type = #{informationType}
+  </select>
+  
+  <select id="findInformationByType" resultType="pojo.Information">
+  	select information_id,information_title from information 
+  	where informationType = #{informationType} limit #{index},#{currentCount}
+  </select>
+  
 </mapper>
