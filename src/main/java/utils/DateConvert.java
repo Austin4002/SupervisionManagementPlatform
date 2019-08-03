@@ -11,9 +11,10 @@ public class DateConvert implements Converter<String, Date>{
 
 	@Override
 	public Date convert(String source) {
+		System.out.println(source);
 		try {
 			if(null!=source) {
-				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 				return df.parse(source);
 			}
 		} catch (ParseException e) {

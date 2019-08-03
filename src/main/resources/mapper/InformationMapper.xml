@@ -3,9 +3,9 @@
 <mapper namespace="dao.InformationMapper">
   <resultMap id="BaseResultMap" type="pojo.Information">
     <id column="information_id" jdbcType="VARCHAR" property="informationId" />
-    <result column="information_title" jdbcType="VARCHAR" property="informationItitle" />
-    <result column="information_message" jdbcType="VARCHAR" property="informationImessage" />
-    <result column="information_date" jdbcType="DATE" property="informationIdate" />
+    <result column="information_title" jdbcType="VARCHAR" property="informationTitle" />
+    <result column="information_message" jdbcType="VARCHAR" property="informationMessage" />
+    <result column="information_date" jdbcType="DATE" property="informationDate" />
     <result column="information_type" jdbcType="VARCHAR" property="informationType" />
     <result column="isHot" jdbcType="INTEGER" property="ishot" />
   </resultMap>
@@ -105,8 +105,8 @@
     insert into information (information_id, information_title, 
       information_message, information_date, information_type, 
       isHot)
-    values (#{informationId,jdbcType=VARCHAR}, #{informationItitle,jdbcType=VARCHAR}, 
-      #{informationImessage,jdbcType=VARCHAR}, #{informationIdate,jdbcType=DATE}, #{informationType,jdbcType=VARCHAR}, 
+    values (#{informationId,jdbcType=VARCHAR}, #{informationTitle,jdbcType=VARCHAR}, 
+      #{informationMessage,jdbcType=VARCHAR}, #{informationDate,jdbcType=DATE}, #{informationType,jdbcType=VARCHAR}, 
       #{ishot,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="pojo.Information">
@@ -115,13 +115,13 @@
       <if test="informationId != null">
         information_id,
       </if>
-      <if test="informationItitle != null">
+      <if test="informationTitle != null">
         information_title,
       </if>
-      <if test="informationImessage != null">
+      <if test="informationMessage != null">
         information_message,
       </if>
-      <if test="informationIdate != null">
+      <if test="informationDate != null">
         information_date,
       </if>
       <if test="informationType != null">
@@ -135,14 +135,14 @@
       <if test="informationId != null">
         #{informationId,jdbcType=VARCHAR},
       </if>
-      <if test="informationItitle != null">
-        #{informationItitle,jdbcType=VARCHAR},
+      <if test="informationTitle != null">
+        #{informationTitle,jdbcType=VARCHAR},
       </if>
-      <if test="informationImessage != null">
-        #{informationImessage,jdbcType=VARCHAR},
+      <if test="informationMessage != null">
+        #{informationMessage,jdbcType=VARCHAR},
       </if>
-      <if test="informationIdate != null">
-        #{informationIdate,jdbcType=DATE},
+      <if test="informationDate != null">
+        #{informationDate,jdbcType=DATE},
       </if>
       <if test="informationType != null">
         #{informationType,jdbcType=VARCHAR},
@@ -164,14 +164,14 @@
       <if test="record.informationId != null">
         information_id = #{record.informationId,jdbcType=VARCHAR},
       </if>
-      <if test="record.informationItitle != null">
-        information_title = #{record.informationItitle,jdbcType=VARCHAR},
+      <if test="record.informationTitle != null">
+        information_title = #{record.informationTitle,jdbcType=VARCHAR},
       </if>
-      <if test="record.informationImessage != null">
-        information_message = #{record.informationImessage,jdbcType=VARCHAR},
+      <if test="record.informationMessage != null">
+        information_message = #{record.informationMessage,jdbcType=VARCHAR},
       </if>
-      <if test="record.informationIdate != null">
-        information_date = #{record.informationIdate,jdbcType=DATE},
+      <if test="record.informationDate != null">
+        information_date = #{record.informationDate,jdbcType=DATE},
       </if>
       <if test="record.informationType != null">
         information_type = #{record.informationType,jdbcType=VARCHAR},
@@ -187,9 +187,9 @@
   <update id="updateByExample" parameterType="map">
     update information
     set information_id = #{record.informationId,jdbcType=VARCHAR},
-      information_title = #{record.informationItitle,jdbcType=VARCHAR},
-      information_message = #{record.informationImessage,jdbcType=VARCHAR},
-      information_date = #{record.informationIdate,jdbcType=DATE},
+      information_title = #{record.informationTitle,jdbcType=VARCHAR},
+      information_message = #{record.informationMessage,jdbcType=VARCHAR},
+      information_date = #{record.informationDate,jdbcType=DATE},
       information_type = #{record.informationType,jdbcType=VARCHAR},
       isHot = #{record.ishot,jdbcType=INTEGER}
     <if test="_parameter != null">
@@ -199,14 +199,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="pojo.Information">
     update information
     <set>
-      <if test="informationItitle != null">
-        information_title = #{informationItitle,jdbcType=VARCHAR},
+      <if test="informationTitle != null">
+        information_title = #{informationTitle,jdbcType=VARCHAR},
       </if>
-      <if test="informationImessage != null">
-        information_message = #{informationImessage,jdbcType=VARCHAR},
+      <if test="informationMessage != null">
+        information_message = #{informationMessage,jdbcType=VARCHAR},
       </if>
-      <if test="informationIdate != null">
-        information_date = #{informationIdate,jdbcType=DATE},
+      <if test="informationDate != null">
+        information_date = #{informationDate,jdbcType=DATE},
       </if>
       <if test="informationType != null">
         information_type = #{informationType,jdbcType=VARCHAR},
@@ -219,22 +219,54 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="pojo.Information">
     update information
-    set information_title = #{informationItitle,jdbcType=VARCHAR},
-      information_message = #{informationImessage,jdbcType=VARCHAR},
-      information_date = #{informationIdate,jdbcType=DATE},
+    set information_title = #{informationTitle,jdbcType=VARCHAR},
+      information_message = #{informationMessage,jdbcType=VARCHAR},
+      information_date = #{informationDate,jdbcType=DATE},
       information_type = #{informationType,jdbcType=VARCHAR},
       isHot = #{ishot,jdbcType=INTEGER}
     where information_id = #{informationId,jdbcType=VARCHAR}
   </update>
   
-  <select id="getCountByType" parameterType="String" resultType="java.long.Integer">
+  <select id="getCountByType" parameterType="java.lang.String" resultType="java.lang.Integer">
   	select count(*) from information
   	where  information_type = #{informationType}
   </select>
   
   <select id="findInformationByType" resultType="pojo.Information">
   	select information_id,information_title from information 
-  	where informationType = #{informationType} limit #{index},#{currentCount}
+  	where information_type = #{informationType} limit #{index},#{currentCount}
+  </select>
+  
+  <update id="addInformation" parameterType="pojo.Information">
+  	insert into information values
+  	(#{informationId},#{informationTitle},#{informationMessage},#{informationDate},#{informationType},#{ishot})
+  </update>
+  
+  <delete id="deleteInformation" parameterType="java.lang.String">
+  	delete from information
+    where information_id = #{informationId}
+  </delete>
+  
+  <select id="findInformationById" parameterType="java.lang.String" resultType="pojo.Information">
+  	select * from information 
+  	where information_id = #{informationId}
+  </select>
+  
+  <update id="updateInformation" parameterType="pojo.Information">
+	  update information set
+	  information_title = #{informationTitle},information_message = #{informationMessage},
+	  information_date = #{informationDate},information_type = #{informationType},isHot = #{ishot}
+	  where information_id = #{informationId}
+  </update>
+  
+  <select id="getCountByIsHot" resultType="java.lang.Integer">
+  	select count(*) from information
+  	where  isHot = 1
+  </select>
+  
+  <select id="findHotInformation" resultType="pojo.Information">
+  	select information_id,information_title from information 
+  	where isHot = 1 limit #{index},#{currentCount}
   </select>
   
 </mapper>

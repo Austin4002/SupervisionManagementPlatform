@@ -31,4 +31,16 @@ public interface InformationMapper {
 	int getCountByType(String informationType);
 
 	List<Information> findInformationByType(@Param("index") int index,@Param("currentCount") int currentCount,@Param("informationType") String informationType);
+
+	int addInformation(Information information);
+
+	int deleteInformation(String informationId);
+
+	Information findInformationById(String informationId);
+
+	int updateInformation(Information information);
+
+	int getCountByIsHot();
+
+	List<Information> findHotInformation(@Param("index") int index,@Param("currentCount") int currentCount);
 }
