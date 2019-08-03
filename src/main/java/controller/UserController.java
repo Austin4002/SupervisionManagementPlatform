@@ -34,11 +34,12 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public Object userLogin(String userAccount, String userPassword,String userType) {
+	public Object userLogin(String userAccount, String userPassword,String userType,HttpSession session) {
 		User user = userService.selectByuserAccount(userAccount,userType);
 		Result result = new Result(-1, "错误");
 		if (user.getUserPassword().equals(userPassword)) {
 			result = new Result<>();
+			session.setAttribute("user", user);
 		}
 		return result;
 	}

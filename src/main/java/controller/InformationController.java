@@ -20,22 +20,23 @@ public class InformationController {
 
 	// 根据类型显示信息
 	@RequestMapping(value = "/informationTypeList")
-	public Object findInformationByType(@RequestParam(defaultValue = "1") int currentPage, String informationType,
-			@RequestParam(defaultValue = "10") int currentCount) {
+	public Object findInformationByType(@RequestParam(defaultValue = "1") int currentPage,
+			String informationType, @RequestParam(defaultValue = "10") int currentCount) {
 
-		Result<String> rs = new Result<>(-1, "Error");
+		Result<PageBean<Information>> rs = new Result<>(-1, "Error");
 		PageBean<Information> pageBean = informationService.findInformationByType(currentCount, currentPage,
 				informationType);
 		if (pageBean.getList() != null) {
 			rs.setCode(200);
 			rs.setMsg("OK");
+			rs.setData(pageBean);
 		}
 		return rs;
 	}
 
 	// 添加信息
 	@RequestMapping(value = "/addInformation")
-	public Object addInformation(Information information) {
+	public Object addInformation(@RequestBody Information information) {
 		System.out.println(information.toString());
 		Result<String> rs = new Result<>(-1, "Error");
 		boolean flag = informationService.addInformation(information);
@@ -61,11 +62,12 @@ public class InformationController {
 	// 更新时回显数据
 	@RequestMapping(value = "/updateInformationUI")
 	public Object updateInformationUI(String informationId) {
-		Result<String> rs = new Result<>(-1, "Error");
+		Result<Information> rs = new Result<>(-1, "Error");
 		Information information = informationService.findInformationById(informationId);
 		if (information != null) {
 			rs.setCode(200);
 			rs.setMsg("查询成功");
+			rs.setData(information);
 		}
 
 		return rs;
@@ -73,7 +75,7 @@ public class InformationController {
 
 	// 更新信息
 	@RequestMapping(value = "/updateInformation")
-	public Object updateInformation(Information information) {
+	public Object updateInformation(@RequestBody Information information) {
 		Result<String> rs = new Result<>(-1, "Error");
 		boolean flag = informationService.updateInformation(information);
 		if (flag) {
@@ -85,13 +87,14 @@ public class InformationController {
 
 	// 查询热点新闻
 	@RequestMapping(value = "/hotInformation")
-	public Object findHotInformation(@RequestParam(defaultValue = "1") int currentPage,
+	public Object findHotInformation(@RequestParam(defaultValue = "1")int currentPage,
 			@RequestParam(defaultValue = "10") int currentCount) {
-		Result<String> rs = new Result<>(-1, "Error");
+		Result<PageBean> rs = new Result<>(-1, "Error");
 		PageBean<Information> pageBean = informationService.findHotInformation(currentCount, currentPage);
 		if (pageBean.getList() != null) {
 			rs.setCode(200);
 			rs.setMsg("OK");
+			rs.setData(pageBean);
 		}
 		return rs;
 	}

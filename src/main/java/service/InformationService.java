@@ -1,7 +1,5 @@
 package service;
 
-import java.util.List;
-
 import pojo.Information;
 import pojo.PageBean;
 

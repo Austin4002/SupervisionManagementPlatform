@@ -27,4 +27,8 @@ public interface ResourceMapper {
     int updateByPrimaryKeySelective(Resource record);
 
     int updateByPrimaryKey(Resource record);
+
+	int getCount();
+
+	List<Resource> findResource(int index, int currentCount);
 }

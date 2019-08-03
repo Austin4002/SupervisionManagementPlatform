@@ -34,6 +34,7 @@ public class InformationServiceImpl implements InformationService {
 		int index = (currentPage - 1) * currentCount;
 		List<Information> list = informationMapper.findInformationByType(index, currentCount, informationType);
 		pageBean.setList(list);
+		
 		return pageBean;
 	}
 

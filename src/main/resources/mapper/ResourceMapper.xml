@@ -241,4 +241,11 @@
       resource_remark = #{resourceRemark,jdbcType=VARCHAR}
     where resource_id = #{resourceId,jdbcType=VARCHAR}
   </update>
+  
+  <select id="getCount" resultType="java.lang.Integer">
+  	select count(*) from resource
+  </select>
+  
+  
+  
 </mapper>
