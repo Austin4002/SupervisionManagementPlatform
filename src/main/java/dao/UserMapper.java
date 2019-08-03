@@ -6,7 +6,7 @@ import pojo.User;
 import pojo.UserExample;
 
 public interface UserMapper {
-	User selectByuserAccount(String userAccount);
+	User selectByuserAccount(String userAccount,String userType);
 
 	long countByExample(UserExample example);
 

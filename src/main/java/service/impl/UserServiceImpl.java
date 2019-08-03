@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
         return userMapper.insert(user);
     }
 
-    public User selectByuserAccount(String userAccount) {
-        return userMapper.selectByuserAccount(userAccount);
+    public User selectByuserAccount(String userAccount,String userType) {
+        return userMapper.selectByuserAccount(userAccount,userType);
     }
 }

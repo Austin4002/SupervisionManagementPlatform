@@ -7,5 +7,5 @@ import pojo.User;
 public interface UserService {
     int insert(User user);
 
-    User selectByuserAccount(String userAccount);
+    User selectByuserAccount(String userAccount,String userType);
 }

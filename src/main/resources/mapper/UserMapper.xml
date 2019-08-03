@@ -89,11 +89,11 @@
     from user
     where user_id = #{userId,jdbcType=VARCHAR}
   </select>
-    <select id="selectByuserAccount" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByuserAccount" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
+        *
         from user
-        where user_Account = #{userAccount,jdbcType=VARCHAR }
+        where user_Account = #{userAccount,jdbcType=VARCHAR } and user_Type = {userType,jdbcType=VARCHAR }
     </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from user
