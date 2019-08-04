@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd" "-//mybatis.org//DTD Mapper 3.0//EN">
 <mapper namespace="dao.ResourceMapper">
   <resultMap id="BaseResultMap" type="pojo.Resource">
     <id column="resource_id" jdbcType="VARCHAR" property="resourceId" />
@@ -245,7 +245,27 @@
   <select id="getCount" resultType="java.lang.Integer">
   	select count(*) from resource
   </select>
+  <select id="findResourceById" parameterType="java.lang.String" resultType="pojo.Resource">
+  	select * form resource where resource_id = #{resourceId}
+  </select>
+  <update id="updateResource" parameterType="pojo.Resource">
+  	update resource set
+  	user_id = #{userId},
+  	resource_name = #{resourceName},
+      resource_number = #{resourceNumber},
+      resource_value = #{resourceValue},
+      resource_location = #{resourceLocation},
+      resource_remark = #{resourceRemark}
+      where resource_id = #{resourceId}
+  </update>
   
-  
+  <insert id="addResource" parameterType="pojo.Resource">
+  	insert into resource values(#{resourceId},
+  	#{userId},#{resourceName},#{resourceNumber},
+  	#{resourceValue},#{resourceLocation},#{resourceRemark});
+  </insert>
+  <delete id="deleteResource" parameterType="java.lang.String">
+  	delete from resource where resource_id = #{resourceId}
+  </delete>
   
 </mapper>

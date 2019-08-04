@@ -27,4 +27,8 @@ public interface AssetMapper {
     int updateByPrimaryKeySelective(Asset record);
 
     int updateByPrimaryKey(Asset record);
+
+	int getCount();
+
+	List<Asset> findAsset(int index, int currentCount);
 }

@@ -1,5 +1,7 @@
 package controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pojo.Information;
 import pojo.PageBean;
 import pojo.Result;
+import pojo.Satisfy;
+import pojo.User;
 import service.InformationService;
 
 @RestController
@@ -20,8 +24,8 @@ public class InformationController {
 
 	// 根据类型显示信息
 	@RequestMapping(value = "/informationTypeList")
-	public Object findInformationByType(@RequestParam(defaultValue = "1") int currentPage,
-			String informationType, @RequestParam(defaultValue = "10") int currentCount) {
+	public Object findInformationByType(@RequestParam(defaultValue = "1") int currentPage, String informationType,
+			@RequestParam(defaultValue = "10") int currentCount) {
 
 		Result<PageBean<Information>> rs = new Result<>(-1, "Error");
 		PageBean<Information> pageBean = informationService.findInformationByType(currentCount, currentPage,
@@ -87,15 +91,33 @@ public class InformationController {
 
 	// 查询热点新闻
 	@RequestMapping(value = "/hotInformation")
-	public Object findHotInformation(@RequestParam(defaultValue = "1")int currentPage,
+	public Object findHotInformation(@RequestParam(defaultValue = "1") int currentPage,
 			@RequestParam(defaultValue = "10") int currentCount) {
-		Result<PageBean> rs = new Result<>(-1, "Error");
+		Result<PageBean<Information>> rs = new Result<>(-1, "Error");
 		PageBean<Information> pageBean = informationService.findHotInformation(currentCount, currentPage);
 		if (pageBean.getList() != null) {
 			rs.setCode(200);
 			rs.setMsg("OK");
 			rs.setData(pageBean);
 		}
+		return rs;
+	}
+
+	// 用户星级评定
+	@RequestMapping(value = "/starInformation")
+	public Object starInformation(String informationId, int star, HttpSession session) {
+		Result rs = new Result<>(-1, "Error");
+		User user = (User) session.getAttribute("user");
+		Satisfy s = new Satisfy();
+		s.setInformationId(informationId);
+		s.setUserId(user.getUserId());
+		s.setSatisfyStar((float) star);
+		boolean flag = informationService.star(s);
+		if (flag) {
+			rs.setCode(200);
+			rs.setMsg("评分成功");
+		}
+
 		return rs;
 	}
 }

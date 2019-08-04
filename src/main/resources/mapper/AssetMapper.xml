@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd" "-//mybatis.org//DTD Mapper 3.0//EN">
 <mapper namespace="dao.AssetMapper">
   <resultMap id="BaseResultMap" type="pojo.Asset">
     <id column="asset_id" jdbcType="VARCHAR" property="assetId" />
@@ -273,4 +273,15 @@
       asset_location = #{assetLocation,jdbcType=VARCHAR}
     where asset_id = #{assetId,jdbcType=VARCHAR}
   </update>
+  
+  <select id="getCount" resultType="java.lang.Integer">
+  	select count(*) from asset
+  </select>
+  
+  <select id="findAsset" parameterType="java.lang.String" resultType="pojo.Asset">
+	select * from   
+  </select>
+  
+  
+  
 </mapper>

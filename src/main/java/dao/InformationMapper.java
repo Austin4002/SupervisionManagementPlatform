@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import pojo.Information;
 import pojo.InformationExample;
+import pojo.Satisfy;
 
 public interface InformationMapper {
     long countByExample(InformationExample example);
@@ -28,7 +29,7 @@ public interface InformationMapper {
 
     int updateByPrimaryKey(Information record);
 
-	int getCountByType(String informationType);
+	int getCountByType(@Param("informationType") String informationType);
 
 	List<Information> findInformationByType(@Param("index") int index,@Param("currentCount") int currentCount,@Param("informationType") String informationType);
 
@@ -43,4 +44,6 @@ public interface InformationMapper {
 	int getCountByIsHot();
 
 	List<Information> findHotInformation(@Param("index") int index,@Param("currentCount") int currentCount);
+
+	int star(Satisfy s);
 }

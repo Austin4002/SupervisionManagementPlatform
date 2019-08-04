@@ -2,6 +2,7 @@ package service;
 
 import pojo.Information;
 import pojo.PageBean;
+import pojo.Satisfy;
 
 public interface InformationService {
 
@@ -16,6 +17,8 @@ public interface InformationService {
 	boolean updateInformation(Information information);
 
 	PageBean<Information> findHotInformation(int currentCount, int currentPage);
+
+	boolean star(Satisfy s);
 
 	
 }

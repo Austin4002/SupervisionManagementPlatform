@@ -229,12 +229,17 @@
   
   <select id="getCountByType" parameterType="java.lang.String" resultType="java.lang.Integer">
   	select count(*) from information
-  	where  information_type = #{informationType}
+  	<if test="informationType!=null and informationType!='' ">
+	  	where  information_type = #{informationType}
+  	</if>
   </select>
   
   <select id="findInformationByType" resultType="pojo.Information">
   	select information_id,information_title from information 
-  	where information_type = #{informationType} limit #{index},#{currentCount}
+  	<if test="informationType!=null and informationType!='' ">
+  		where information_type = #{informationType}
+  	</if>
+  	limit #{index},#{currentCount}
   </select>
   
   <update id="addInformation" parameterType="pojo.Information">
@@ -268,5 +273,9 @@
   	select information_id,information_title from information 
   	where isHot = 1 limit #{index},#{currentCount}
   </select>
+  
+  <insert id="star" parameterType="pojo.Satisfy">
+  	insert into satisfy values(#{satisfyId},#{userId},#{informationId},#{satisfyStar})
+  </insert>
   
 </mapper>

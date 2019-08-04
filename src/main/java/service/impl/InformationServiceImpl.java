@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import dao.InformationMapper;
 import pojo.Information;
 import pojo.PageBean;
+import pojo.Satisfy;
 import service.InformationService;
 
 @Service
@@ -34,7 +35,7 @@ public class InformationServiceImpl implements InformationService {
 		int index = (currentPage - 1) * currentCount;
 		List<Information> list = informationMapper.findInformationByType(index, currentCount, informationType);
 		pageBean.setList(list);
-		
+
 		return pageBean;
 	}
 
@@ -53,7 +54,7 @@ public class InformationServiceImpl implements InformationService {
 
 	@Override
 	public Information findInformationById(String informationId) {
-		Information information =informationMapper.findInformationById(informationId);
+		Information information = informationMapper.findInformationById(informationId);
 		return information;
 	}
 
@@ -81,6 +82,13 @@ public class InformationServiceImpl implements InformationService {
 		List<Information> list = informationMapper.findHotInformation(index, currentCount);
 		pageBean.setList(list);
 		return pageBean;
+	}
+
+	@Override
+	public boolean star(Satisfy s) {
+		s.setSatisfyId(UUID.randomUUID().toString().replaceAll("-", ""));
+		int i = informationMapper.star(s);
+		return i > 0 ? true : false;
 	}
 
 }

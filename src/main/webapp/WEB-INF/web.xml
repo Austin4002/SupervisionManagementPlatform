@@ -19,6 +19,7 @@
     <filter-name>CORSFilter</filter-name>
     <url-pattern>/*</url-pattern>
     <dispatcher>REQUEST</dispatcher>
+    
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>
     <dispatcher>ERROR</dispatcher>
