@@ -194,11 +194,11 @@
     where satisfy_id = #{satisfyId,jdbcType=VARCHAR}
   </update>
   
-  <select id="findSatisfyByInformationId" parameterType="java.lang.String" resultType="pojo.satisfy">
+  <select id="findSatisfyByInformationId" parameterType="java.lang.String" resultType="pojo.Satisfy">
   	select * from satisfy where information_id = #{informationId}
   </select>
   
-  <select id="findSatisfyByUserId" parameterType="java.lang.String" resultType="pojo.satisfy">
+  <select id="findSatisfyByUserId" parameterType="java.lang.String" resultType="pojo.Satisfy">
   	select * from satisfy where information_id = #{informationId} and user_id = #{userId}
   </select>
   

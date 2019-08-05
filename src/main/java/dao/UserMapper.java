@@ -1,33 +1,34 @@
 package dao;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import pojo.User;
 import pojo.UserExample;
 
 public interface UserMapper {
-	User selectByuserAccount(String userAccount,String userType);
+    User selectByuserAccount(User user);
 
-	long countByExample(UserExample example);
+    long countByExample(UserExample example);
 
-	int deleteByExample(UserExample example);
+    int deleteByExample(UserExample example);
 
-	int deleteByPrimaryKey(String userId);
+    int deleteByPrimaryKey(String userId);
 
-	int insert(User record);
+    int insert(User record);
 
-	int insertSelective(User record);
+    int insertSelective(User record);
 
-	List<User> selectByExample(UserExample example);
+    List<User> selectByExample(UserExample example);
 
-	User selectByPrimaryKey(String userId);
+    User selectByPrimaryKey(String userId);
 
-	int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
+    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 
-	int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
 
-	int updateByPrimaryKeySelective(User record);
+    int updateByPrimaryKeySelective(User record);
 
-	int updateByPrimaryKey(User record);
+    int updateByPrimaryKey(User record);
 
 }
