@@ -12,7 +12,7 @@ public class Satisfy implements Serializable {
 
 	private String informationId;
 
-	private Float satisfyStar;
+	private int satisfyStar;
 
 	private static final long serialVersionUID = 1L;
 

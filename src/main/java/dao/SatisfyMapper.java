@@ -27,4 +27,8 @@ public interface SatisfyMapper {
     int updateByPrimaryKeySelective(Satisfy record);
 
     int updateByPrimaryKey(Satisfy record);
+
+	List<Satisfy> findSatisfyByInformationId(@Param("informationId") String informationId);
+
+	Satisfy findSatisfyByUserId(@Param("informationId") String informationId,@Param("userId") String userId);
 }

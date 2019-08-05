@@ -111,7 +111,7 @@ public class InformationController {
 		Satisfy s = new Satisfy();
 		s.setInformationId(informationId);
 		s.setUserId(user.getUserId());
-		s.setSatisfyStar((float) star);
+		s.setSatisfyStar(star);
 		boolean flag = informationService.star(s);
 		if (flag) {
 			rs.setCode(200);

@@ -27,4 +27,16 @@ public interface FundMapper {
     int updateByPrimaryKeySelective(Fund record);
 
     int updateByPrimaryKey(Fund record);
+
+	int addFund(Fund fund);
+
+	int getCount();
+
+	List<Fund> findAllFund(@Param("index") int index,@Param("currentCount") int currentCount);
+
+	int updateFund(Fund fund);
+
+	int deleteFund(String fundId);
+
+	Fund findFundById(String fundId);
 }
