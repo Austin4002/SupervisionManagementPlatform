@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.UserMapper">
   <resultMap id="BaseResultMap" type="pojo.User">
-    <id column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="user_account" jdbcType="VARCHAR" property="userAccount" />
-    <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
-    <result column="user_department" jdbcType="VARCHAR" property="userDepartment" />
-    <result column="user_type" jdbcType="VARCHAR" property="userType" />
+    <id column="user_id" jdbcType="VARCHAR" property="userId"/>
+    <result column="user_account" jdbcType="VARCHAR" property="userAccount"/>
+    <result column="user_password" jdbcType="VARCHAR" property="userPassword"/>
+    <result column="user_department" jdbcType="VARCHAR" property="userDepartment"/>
+    <result column="user_type" jdbcType="VARCHAR" property="userType"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -74,18 +74,18 @@
     <if test="distinct">
       distinct
     </if>
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List"/>
     from user
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
+      <include refid="Example_Where_Clause"/>
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+    select
+    <include refid="Base_Column_List"/>
     from user
     where user_id = #{userId,jdbcType=VARCHAR}
   </select>
@@ -93,7 +93,9 @@
         select
         *
         from user
-        where user_Account = #{userAccount,jdbcType=VARCHAR } and user_Type = {userType,jdbcType=VARCHAR }
+        where user_account = #{userAccount }
+        and user_type = #{userType }
+        and user_password=#{userPassword}
     </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from user
@@ -102,7 +104,7 @@
   <delete id="deleteByExample" parameterType="pojo.UserExample">
     delete from user
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
+      <include refid="Example_Where_Clause"/>
     </if>
   </delete>
   <insert id="insert" parameterType="pojo.User">
@@ -151,7 +153,7 @@
   <select id="countByExample" parameterType="pojo.UserExample" resultType="java.lang.Long">
     select count(*) from user
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
+      <include refid="Example_Where_Clause"/>
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
@@ -174,18 +176,18 @@
       </if>
     </set>
     <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
+      <include refid="Update_By_Example_Where_Clause"/>
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
     update user
     set user_id = #{record.userId,jdbcType=VARCHAR},
-      user_account = #{record.userAccount,jdbcType=VARCHAR},
-      user_password = #{record.userPassword,jdbcType=VARCHAR},
-      user_department = #{record.userDepartment,jdbcType=VARCHAR},
-      user_type = #{record.userType,jdbcType=VARCHAR}
+    user_account = #{record.userAccount,jdbcType=VARCHAR},
+    user_password = #{record.userPassword,jdbcType=VARCHAR},
+    user_department = #{record.userDepartment,jdbcType=VARCHAR},
+    user_type = #{record.userType,jdbcType=VARCHAR}
     <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
+      <include refid="Update_By_Example_Where_Clause"/>
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="pojo.User">
