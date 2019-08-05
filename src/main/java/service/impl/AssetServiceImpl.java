@@ -1,6 +1,7 @@
 package service.impl;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,5 +32,31 @@ public class AssetServiceImpl implements AssetService {
 		List<Asset> list = assetMapper.findAsset(index, currentCount);
 		pageBean.setList(list);
 		return pageBean;
+	}
+
+	@Override
+	public boolean addAsset(Asset asset) {
+		asset.setAssetId(UUID.randomUUID().toString().replaceAll("-", ""));
+		int i = assetMapper.addAsset(asset);
+		return i > 0 ? true : false;
+	}
+
+	@Override
+	public boolean deleteAsset(String assetId) {
+		int i = assetMapper.deleteAsset(assetId);
+
+		return i > 0 ? true : false;
+	}
+
+	@Override
+	public Asset findAssetById(String assetId) {
+		Asset asset = assetMapper.findAssetById(assetId);
+		return asset;
+	}
+
+	@Override
+	public boolean updateAsset(Asset asset) {
+		int i = assetMapper.updateAsset(asset);
+		return i > 0 ? true : false;
 	}
 }

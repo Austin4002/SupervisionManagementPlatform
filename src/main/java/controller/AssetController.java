@@ -31,26 +31,47 @@ public class AssetController {
 	}
 	
 	@RequestMapping(value="/addAsset")
-	public Object addAsset() {
+	public Object addAsset(Asset asset) {
 		Result rs = new Result<>(200, "ERROR");
+		boolean flag =assetService.addAsset(asset);
+		if(flag) {
+			rs.setCode(200);
+			rs.setMsg("添加资产成功");
+		}
 		return rs;
 	}
 	
 	@RequestMapping(value="/deleteAsset")
-	public Object deleteAsset() {
+	public Object deleteAsset(String assetId) {
 		Result rs = new Result<>(200, "ERROR");
+		boolean flag =assetService.deleteAsset(assetId);
+		if(flag) {
+			rs.setCode(200);
+			rs.setMsg("删除资产成功");
+		}
 		return rs;
 	}
 	
 	@RequestMapping(value="/updateAssetUI")
-	public Object updateAssetUI() {
-		Result rs = new Result<>(200, "ERROR");
+	public Object updateAssetUI(String assetId) {
+		Result<Asset> rs = new Result<>(200, "ERROR");
+		Asset asset = assetService.findAssetById(assetId);
+		if(asset!=null) {
+			rs.setCode(200);
+			rs.setMsg("查询资产成功");
+			rs.setData(asset);
+		}
 		return rs;
 	}
 	
 	@RequestMapping(value="/updateAsset")
-	public Object updateAsset() {
+	public Object updateAsset(Asset asset) {
 		Result rs = new Result<>(200, "ERROR");
+		boolean flag =assetService.updateAsset(asset);
+		if(flag) {
+			rs.setCode(200);
+			rs.setMsg("更新资产成功");
+		}
 		return rs;
 	}
 }

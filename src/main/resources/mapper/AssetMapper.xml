@@ -278,10 +278,35 @@
   	select count(*) from asset
   </select>
   
-  <select id="findAsset" parameterType="java.lang.String" resultType="pojo.Asset">
-	select * from   
+  <select id="findAsset" parameterType="java.lang.Integer" resultType="pojo.Asset">
+	select * from asset limit #{index},#{currentCount}
   </select>
   
+  <insert id="addAsset" parameterType="pojo.Asset">
+  	insert into asset values(#{assetId},#{userId},#{assetNumber},#{assetDate},
+  	#{assetPrice},#{assetBelong},#{assetDepreciation},#{assetYear},#{assetLocation})
+  </insert>
+  
+  
+  <delete id="deleteAsset" parameterType="java.lang.String">
+  	delete from asset where asset_id = #{assetId}
+  </delete>
+  
+  <select id="findAssetById" parameterType="java.lang.String" resultType="pojo.Asset">
+  	select * from asset where asset_id= #{assetId}
+  </select>
+  
+  <update id="updateAsset" parameterType="pojo.Asset">
+  	update asset set user_id = #{userId},
+      asset_number = #{assetNumber},
+      asset_date = #{assetDate},
+      asset_price = #{assetPrice},
+      asset_belong = #{assetBelong},
+      asset_depreciation = #{assetDepreciation},
+      asset_year = #{assetYear},
+      asset_location = #{assetLocation}
+    where asset_id = #{assetId}
+  </update>
   
   
 </mapper>

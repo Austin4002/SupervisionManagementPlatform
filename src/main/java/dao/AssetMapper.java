@@ -30,5 +30,13 @@ public interface AssetMapper {
 
 	int getCount();
 
-	List<Asset> findAsset(int index, int currentCount);
+	List<Asset> findAsset(@Param("index") int index,@Param("currentCount") int currentCount);
+
+	int addAsset(Asset asset);
+
+	int deleteAsset(String assetId);
+
+	Asset findAssetById(String assetId);
+
+	int updateAsset(Asset asset);
 }
