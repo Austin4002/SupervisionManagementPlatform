@@ -6,7 +6,7 @@ import pojo.Satisfy;
 
 public interface InformationService {
 
-	PageBean<Information> findInformationByType(int currentCount, int currnetPage, String informationType2);
+	PageBean<Information> findInformationByType(int currentCount, int currnetPage, String informationType,String informationTitle);
 
 	boolean addInformation(Information information);
 

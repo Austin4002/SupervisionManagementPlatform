@@ -21,6 +21,7 @@ public class SatisfyController {
 	@RequestMapping(value="/findSatisfyByInformationId")
 	public Object findSatisfyByInformationId(String informationId) {
 		Result<Integer> rs = new Result<Integer>(-1, "ERROR");
+		rs.setData(0);
 		int total = satisfyService.findSatisfyByInformationId(informationId);
 		if (total > 0) {
 			rs.setCode(200);

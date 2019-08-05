@@ -19,7 +19,7 @@ public class InformationServiceImpl implements InformationService {
 	private InformationMapper informationMapper;
 
 	@Override
-	public PageBean<Information> findInformationByType(int currentCount, int currentPage, String informationType) {
+	public PageBean<Information> findInformationByType(int currentCount, int currentPage, String informationType,String informationTitle) {
 		PageBean<Information> pageBean = new PageBean<Information>();
 		// 当前页
 		pageBean.setCurrentPage(currentPage);
@@ -27,13 +27,13 @@ public class InformationServiceImpl implements InformationService {
 		pageBean.setCurrentCount(currentCount);
 		// 总条数
 		int totalCount = 0;
-		totalCount = informationMapper.getCountByType(informationType);
+		totalCount = informationMapper.getCountByType(informationType,informationTitle);
 		pageBean.setTotalCount(totalCount);
 		// 总页数
 		int totalPage = (int) Math.ceil(1.0 * totalCount / currentCount);
 		pageBean.setTotalPage(totalPage);
 		int index = (currentPage - 1) * currentCount;
-		List<Information> list = informationMapper.findInformationByType(index, currentCount, informationType);
+		List<Information> list = informationMapper.findInformationByType(index, currentCount, informationType,informationTitle);
 		pageBean.setList(list);
 
 		return pageBean;

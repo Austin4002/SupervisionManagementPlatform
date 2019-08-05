@@ -25,11 +25,11 @@ public class InformationController {
 	// 根据类型显示信息
 	@RequestMapping(value = "/informationTypeList")
 	public Object findInformationByType(@RequestParam(defaultValue = "1") int currentPage, String informationType,
-			@RequestParam(defaultValue = "10") int currentCount) {
+			@RequestParam(defaultValue = "10") int currentCount,String informationTitle) {
 
 		Result<PageBean<Information>> rs = new Result<>(-1, "Error");
 		PageBean<Information> pageBean = informationService.findInformationByType(currentCount, currentPage,
-				informationType);
+				informationType,informationTitle);
 		if (pageBean.getList() != null) {
 			rs.setCode(200);
 			rs.setMsg("OK");
@@ -119,4 +119,7 @@ public class InformationController {
 		}
 		return rs;
 	}
+	
+	
+	
 }
