@@ -18,6 +18,7 @@ public class SatisfyController {
 	private SatisfyService satisfyService;
 
 	// 获得某一信息的所有评价总和
+	@RequestMapping(value="/findSatisfyByInformationId")
 	public Object findSatisfyByInformationId(String informationId) {
 		Result<Integer> rs = new Result<Integer>(-1, "ERROR");
 		int total = satisfyService.findSatisfyByInformationId(informationId);
@@ -30,6 +31,7 @@ public class SatisfyController {
 	}
 
 	// 查询某一用户对某一信息的评价
+	@RequestMapping(value="/findSatisfyByUserId")
 	public Object findSatisfyByUserId(HttpSession session,String informationId) {
 		Result<Integer> rs = new Result<Integer>(-1, "ERROR");
 		User user = (User) session.getAttribute("user");
