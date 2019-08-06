@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pojo.Fund;
@@ -37,7 +38,7 @@ public class FundController {
 
 	// 查询资金
 	@RequestMapping(value = "/findFund")
-	public Object findFund(int currentCount, int currentPage) {
+	public Object findFund(@RequestParam(defaultValue = "10") int currentCount,@RequestParam(defaultValue = "1") int currentPage) {
 		Result<PageBean<Fund>> rs = new Result<>(-1, "ERROR");
 		PageBean<Fund> pageBean = fundService.findAllFund(currentCount, currentPage);
 		if (pageBean.getList() != null) {

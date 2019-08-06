@@ -244,7 +244,7 @@
 		(#{fundId},#{userId},#{fundCost},#{fundType},#{fundRemark},#{fundDate})
 	</insert>
 
-	<select id="getCount">
+	<select id="getCount" resultType="java.lang.Integer">
 		select count(*) from fund
 	</select>
 
