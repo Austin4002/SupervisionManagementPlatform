@@ -1,6 +1,7 @@
 package controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,7 +48,7 @@ public class ResourceController {
 	}
 
 	// 修改
-	public Object updateResource(Resource resource) {
+	public Object updateResource(@RequestBody Resource resource) {
 		Result rs = new Result<>(-1, "ERROR");
 		boolean flag = resourceService.updateResource(resource);
 		if (flag) {
@@ -59,7 +60,7 @@ public class ResourceController {
 	}
 
 	// 添加
-	public Object addResource(Resource resource) {
+	public Object addResource(@RequestBody Resource resource) {
 		Result rs = new Result<>(-1, "ERROR");
 		boolean flag = resourceService.addResource(resource);
 		if (flag) {

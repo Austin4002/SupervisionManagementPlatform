@@ -3,6 +3,7 @@ package controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +22,7 @@ public class FundController {
 
 	// 增加资金
 	@RequestMapping(value = "/addFund")
-	public Object addFund(Fund fund, HttpSession session) {
+	public Object addFund(@RequestBody Fund fund, HttpSession session) {
 		Result rs = new Result<>(-1, "ERROR");
 		User user = (User) session.getAttribute("user");
 		String userId = user.getUserId();
@@ -63,7 +64,7 @@ public class FundController {
 
 	// 更新资金
 	@RequestMapping(value = "/updateFund")
-	public Object updateFund(Fund fund) {
+	public Object updateFund(@RequestBody Fund fund) {
 		Result rs = new Result<>(-1, "ERROR");
 		boolean flag = fundService.updateFund(fund);
 		if (flag) {
