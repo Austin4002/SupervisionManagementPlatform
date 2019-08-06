@@ -245,6 +245,10 @@
   <select id="getCount" resultType="java.lang.Integer">
   	select count(*) from resource
   </select>
+  <select id="findResource" parameterType="java.lang.Integer" resultType="pojo.Resource">
+  	select * from resource limit #{index},#{currentCount}
+  </select>
+  
   <select id="findResourceById" parameterType="java.lang.String" resultType="pojo.Resource">
   	select * form resource where resource_id = #{resourceId}
   </select>

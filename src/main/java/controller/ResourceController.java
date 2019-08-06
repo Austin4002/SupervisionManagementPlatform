@@ -36,6 +36,7 @@ public class ResourceController {
 	}
 
 	// 修改页面
+	@RequestMapping(value="/updateResourceUI")
 	public Object updateResourceUI(String resourceId) {
 		Result<Resource> rs = new Result<>(-1, "ERROR");
 		Resource resource = resourceService.findResourceById(resourceId);
@@ -48,6 +49,7 @@ public class ResourceController {
 	}
 
 	// 修改
+	@RequestMapping(value="/updateResource")
 	public Object updateResource(@RequestBody Resource resource) {
 		Result rs = new Result<>(-1, "ERROR");
 		boolean flag = resourceService.updateResource(resource);
@@ -60,6 +62,7 @@ public class ResourceController {
 	}
 
 	// 添加
+	@RequestMapping(value="/addResource")
 	public Object addResource(@RequestBody Resource resource) {
 		Result rs = new Result<>(-1, "ERROR");
 		boolean flag = resourceService.addResource(resource);
@@ -71,6 +74,7 @@ public class ResourceController {
 	}
 
 	// 删除
+	@RequestMapping(value="/deleteResource")
 	public Object deleteResource(String resourceId) {
 		Result rs = new Result<>(-1, "ERROR");
 		boolean flag = resourceService.deleteResource(resourceId);
