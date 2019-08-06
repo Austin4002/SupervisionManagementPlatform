@@ -1,5 +1,7 @@
 package controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pojo.PageBean;
 import pojo.Resource;
 import pojo.Result;
+import pojo.User;
 import service.ResourceService;
 
 @RestController
@@ -63,8 +66,10 @@ public class ResourceController {
 
 	// 添加
 	@RequestMapping(value="/addResource")
-	public Object addResource(@RequestBody Resource resource) {
+	public Object addResource(@RequestBody Resource resource,HttpSession session) {
 		Result rs = new Result<>(-1, "ERROR");
+		User user = (User) session.getAttribute("user");
+		resource.setUserId(user.getUserId());
 		boolean flag = resourceService.addResource(resource);
 		if (flag) {
 			rs.setCode(200);
