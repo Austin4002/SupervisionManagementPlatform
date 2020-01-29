@@ -117,7 +117,6 @@ public class InformationController {
 			rs.setCode(200);
 			rs.setMsg("评分成功");
 		}
-
 		return rs;
 	}
 }

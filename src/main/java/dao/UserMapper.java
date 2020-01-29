@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package dao;
 
 import java.util.List;
@@ -6,6 +7,16 @@ import org.apache.ibatis.annotations.Param;
 import pojo.User;
 import pojo.UserExample;
 
+=======
+package dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+import pojo.User;
+import pojo.UserExample;
+
+>>>>>>> branch 'master' of https://github.com/Austin4002/SupervisionManagementPlatform
 public interface UserMapper {
     User selectByuserAccount(User user);
 
