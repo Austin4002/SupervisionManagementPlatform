@@ -30,7 +30,7 @@ public interface ResourceMapper {
 
 	int getCount();
 
-	List<Resource> findResource(int index, int currentCount);
+	List<Resource> findResource(@Param("index") int index,@Param("currentCount") int currentCount);
 
 	Resource findResourceById(String resourceId);
 

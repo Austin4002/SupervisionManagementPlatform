@@ -229,16 +229,29 @@
   
   <select id="getCountByType" parameterType="java.lang.String" resultType="java.lang.Integer">
   	select count(*) from information
-  	<if test="informationType!=null and informationType!='' ">
-	  	where  information_type = #{informationType}
-  	</if>
+  	<where>
+	  	<if test="informationType!=null and informationType!='' ">
+		  	information_type = #{informationType}
+	  	</if>
+	  	
+  		<if test="informationTitle!=null and informationTitle!=''">
+	  		and information_title like "%"#{informationTitle}"%"
+	  	</if>
+  	</where>
   </select>
   
   <select id="findInformationByType" resultType="pojo.Information">
-  	select information_id,information_title from information 
-  	<if test="informationType!=null and informationType!='' ">
-  		where information_type = #{informationType}
-  	</if>
+  	select information_id,information_title,information_date from information 
+  	<where>
+	  	<if test="informationType!=null and informationType!='' ">
+  			information_type = #{informationType}
+	  	</if>
+	  	
+	  	<if test="informationTitle!=null and informationTitle!=''">
+	  		and information_title like "%"#{informationTitle}"%"
+	  	</if>
+  	</where>
+  		
   	limit #{index},#{currentCount}
   </select>
   

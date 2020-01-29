@@ -1,6 +1,7 @@
 package controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +36,7 @@ public class ResourceController {
 	}
 
 	// 修改页面
+	@RequestMapping(value = "/updateResourceUI")
 	public Object updateResourceUI(String resourceId) {
 		Result<Resource> rs = new Result<>(-1, "ERROR");
 		Resource resource = resourceService.findResourceById(resourceId);
@@ -47,7 +49,8 @@ public class ResourceController {
 	}
 
 	// 修改
-	public Object updateResource(Resource resource) {
+	@RequestMapping(value = "/updateResource")
+	public Object updateResource(@RequestBody Resource resource) {
 		Result rs = new Result<>(-1, "ERROR");
 		boolean flag = resourceService.updateResource(resource);
 		if (flag) {
@@ -59,7 +62,8 @@ public class ResourceController {
 	}
 
 	// 添加
-	public Object addResource(Resource resource) {
+	@RequestMapping(value = "/addResource")
+	public Object addResource(@RequestBody Resource resource) {
 		Result rs = new Result<>(-1, "ERROR");
 		boolean flag = resourceService.addResource(resource);
 		if (flag) {
@@ -70,6 +74,7 @@ public class ResourceController {
 	}
 
 	// 删除
+	@RequestMapping(value = "/deleteResource")
 	public Object deleteResource(String resourceId) {
 		Result rs = new Result<>(-1, "ERROR");
 		boolean flag = resourceService.deleteResource(resourceId);

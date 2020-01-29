@@ -297,7 +297,7 @@
   </select>
   
   <update id="updateAsset" parameterType="pojo.Asset">
-  	update asset set user_id = #{userId},
+  	update asset set
       asset_number = #{assetNumber},
       asset_date = #{assetDate},
       asset_price = #{assetPrice},

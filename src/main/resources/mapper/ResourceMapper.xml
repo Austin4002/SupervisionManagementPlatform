@@ -245,12 +245,15 @@
   <select id="getCount" resultType="java.lang.Integer">
   	select count(*) from resource
   </select>
+  <select id="findResource" parameterType="java.lang.Integer" resultType="pojo.Resource">
+  	select * from resource limit #{index},#{currentCount}
+  </select>
+  
   <select id="findResourceById" parameterType="java.lang.String" resultType="pojo.Resource">
-  	select * form resource where resource_id = #{resourceId}
+  	select * from resource where resource_id = #{resourceId}
   </select>
   <update id="updateResource" parameterType="pojo.Resource">
   	update resource set
-  	user_id = #{userId},
   	resource_name = #{resourceName},
       resource_number = #{resourceNumber},
       resource_value = #{resourceValue},

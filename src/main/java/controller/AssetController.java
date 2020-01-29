@@ -1,6 +1,7 @@
 package controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +32,7 @@ public class AssetController {
 	}
 	
 	@RequestMapping(value="/addAsset")
-	public Object addAsset(Asset asset) {
+	public Object addAsset(@RequestBody Asset asset) {
 		Result rs = new Result<>(200, "ERROR");
 		boolean flag =assetService.addAsset(asset);
 		if(flag) {
@@ -65,7 +66,7 @@ public class AssetController {
 	}
 	
 	@RequestMapping(value="/updateAsset")
-	public Object updateAsset(Asset asset) {
+	public Object updateAsset(@RequestBody Asset asset) {
 		Result rs = new Result<>(200, "ERROR");
 		boolean flag =assetService.updateAsset(asset);
 		if(flag) {
@@ -74,4 +75,5 @@ public class AssetController {
 		}
 		return rs;
 	}
+	
 }
